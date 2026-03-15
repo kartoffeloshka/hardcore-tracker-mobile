@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const API = import.meta.env.VITE_API_URL;
-
+console.log("API:", API);
 export default function App() {
 
   const [exercise,setExercise] = useState("");
@@ -35,7 +35,11 @@ export default function App() {
       ]
     };
 
-    await axios.post(`${API}/api/workouts`, workout);
+    try {
+  await axios.post(`${API}/api/workouts`, workout);
+} catch(err){
+  console.error("POST error:", err);
+}
 
     setWeight("");
     setReps("");
